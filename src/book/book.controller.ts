@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, ParseIntPipe } from '@nestjs/common';
 import { BookService } from './book.service';
 import { CreateBookDto } from './dto/create-book.dto';
 import { UpdateBookDto } from './dto/update-book.dto';
@@ -7,7 +7,7 @@ import { UpdateBookDto } from './dto/update-book.dto';
 export class BookController {
   constructor(private readonly bookService: BookService) {}
 
-  @Post()
+  @Post("/add")
   create(@Body() createBookDto: CreateBookDto) {
     return this.bookService.create(createBookDto);
   }
@@ -16,9 +16,9 @@ export class BookController {
   findAll() {
     return this.bookService.findAll();
   }
-
+// add pipe to check expected input
   @Get(':id')
-  findOne(@Param('id') id: string) {
+  findOne(@Param('id', ParseIntPipe  )   id: string) {
     return this.bookService.findOne(+id);
   }
 
