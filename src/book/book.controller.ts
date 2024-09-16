@@ -7,7 +7,7 @@ import { BookPipe } from './pipes/book.pipe';
 @Controller('book')
 export class BookController {
   constructor(private readonly bookService: BookService) {}
-
+//add custom pipe
   @Post("/add")
   create(@Body( new BookPipe) createBookDto: CreateBookDto) {
     return this.bookService.create(createBookDto);
