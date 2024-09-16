@@ -2,13 +2,14 @@ import { Controller, Get, Post, Body, Patch, Param, Delete, ParseIntPipe } from 
 import { BookService } from './book.service';
 import { CreateBookDto } from './dto/create-book.dto';
 import { UpdateBookDto } from './dto/update-book.dto';
+import { BookPipe } from './pipes/book.pipe';
 
 @Controller('book')
 export class BookController {
   constructor(private readonly bookService: BookService) {}
 
   @Post("/add")
-  create(@Body() createBookDto: CreateBookDto) {
+  create(@Body( new BookPipe) createBookDto: CreateBookDto) {
     return this.bookService.create(createBookDto);
   }
 
