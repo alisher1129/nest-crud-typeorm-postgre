@@ -14,12 +14,13 @@ export class AuthController {
 
   @Get()
   findAll() {
-    return this.authService.findAll();
+    return this.authService.findAll();  
   }
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.authService.findOne(+id);
+    console.log("user is:", id)
+    return this.authService.getUserByName(id);
   }
 
   @Patch(':id')
